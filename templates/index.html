@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block body %}
+
+        <!-- Page Header-->
+        <header class="masthead" style="height:150px; background-image: url('  {{ url_for('static',filename='assets/img/home-bg.jpg')}}     ')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h2>{{param["blog_name"]}}</h2>
+                            <p>{{param["blog_text"]}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-10 col-xl-10">
+                    <!-- Post preview-->
+
+                    {% for pst in post %}
+                    <div class="post-preview">
+                        <a href="post/{{pst.sno}}">
+                            <h2 class="post-title">{{pst.post_title}}</h2>
+                           
+                        </a>
+                        <p class="post-meta">
+                            Posted by
+                            <b>{{pst.post_by}}</b>
+                            on {{pst.post_date}}
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                   {%endfor%}
+                    <!-- Pager-->
+
+                    {%if prev == "#" %}
+                    <div class="clearfix">
+                        
+                         <a style="text-align:right;" class="btn btn-primary float-right" href="{{next}}">Older Post &rarr;</a>
+                    </div>
+              
+                    {% elif next  == "#" %}
+                    <div class="clearfix">
+                        <a class="btn btn-primary float-left" href="{{prev}}"> &larr; Newer Post</a>
+                       
+                    </div>
+                    {% else %}
+             
+                    <div class="clearfix">
+                        <a class="btn btn-primary float-left" href="{{prev}}"> &larr; Newer Post</a>
+                         <a style="text-align:right;" class="btn btn-primary float-right" href="{{next}}">Older Post &rarr;</a>
+                    </div>
+                    
+                    {% endif %}
+                  
+                </div>
+            </div>
+        </div>
+        {% endblock %}
